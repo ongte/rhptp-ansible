@@ -1,0 +1,11 @@
+serverb
+
+[web]
+server[a:b]
+
+[db]
+serverc
+
+[servers:children]
+web
+db

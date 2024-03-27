@@ -1,0 +1,21 @@
+---
+- name: install start and enable httpd
+  hosts: web
+  tasks:
+  - name: httpd package is present
+    ansible.builtin.dnf:
+      name: 
+        - httpd
+        - mod_ssl
+      state: present
+
+  - name: correct index.html is present
+    ansible.builtin.copy:
+      content: "This is my web server...\n"
+      dest: /var/www/html/index.html
+
+  - name: start and enable service
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes

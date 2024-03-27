@@ -1,0 +1,6 @@
+- name: Demo Non-idempotent change
+  hosts: serverb
+  tasks:
+  - name: Change resolv.conf
+    ansible.builtin.shell:
+      cmd: echo "172.25.250.11 server2 serverb" >> /etc/hosts
