@@ -1,0 +1,9 @@
+---
+- name: using a variable include file
+  hosts: servera
+  vars_files: vars/common
+  tasks:
+  - name: install package
+    ansible.builtin.dnf:
+      name: "{{ my_package }}"
+      state: latest

@@ -1,0 +1,13 @@
+---
+- name: configure web services
+  hosts: web
+  tasks:
+  - name: this is the {{ web_package }} package
+    debug:
+      msg: "Installing {{ web_package }}"
+  - name: this is the {{ web_service }} service
+    debug:
+      msg: "Starting {{ web_service }}"
+  - name: this is the {{ web_port }} port
+    debug:
+      msg: "Opening {{ web_port }} port"

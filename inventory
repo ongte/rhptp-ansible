@@ -1,10 +1,15 @@
-serverb
-
 [web]
-server[a:b]
-
+server[a:b]			
+ 
 [db]
 serverc
+serverd
+
+[dev]
+serverb
+
+[test]
+serverd
 
 [servers:children]
 web
