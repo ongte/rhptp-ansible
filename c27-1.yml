@@ -31,7 +31,7 @@
 
 - name: test webserver access
   hosts: localhost
-  become: no
+  become: false
   tasks:
   - name: test webserver access
     ansible.builtin.uri:

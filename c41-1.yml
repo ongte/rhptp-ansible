@@ -1,0 +1,23 @@
+---
+- name: install and start services
+  hosts: servera
+  vars:
+    services:
+    - vsftpd
+    - httpd
+    - smb
+  tasks:
+  - name: install packages
+    ansible.builtin.dnf:
+      name:
+      - vsftpd
+      - httpd
+      - samba
+      state: latest
+  - name: start the services
+    ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop: "{{ services }}"
+

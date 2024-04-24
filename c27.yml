@@ -18,7 +18,7 @@
 
 - name: test httpd accessibility
   hosts: localhost
-  become: no
+  become: false
   tasks:
   - name: test httpd access
     ansible.builtin.uri:
