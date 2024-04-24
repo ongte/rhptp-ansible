@@ -1,0 +1,8 @@
+---
+- name: testing multiple conditions
+  hosts: all
+  tasks:
+  - name: showing output
+    debug:
+      msg: using RHEL 9.0
+    when: ansible_facts['distribution_version'] == "9.0" and ansible_facts['distribution'] == "RedHat"
