@@ -1,0 +1,17 @@
+---
+- name: stat module tests
+  hosts: servera
+  tasks:
+  - ansible.builtin.command: touch /tmp/statfile
+  - ansible.builtin.stat:
+      path: /tmp/statfile
+    register: st
+  - name: show current values
+    ansible.builtin.debug:
+      msg: current value of the st variable is {{ st }}
+  - name: changing file permissions if that's needed
+    ansible.builtin.file:
+      path: /tmp/statfile
+      mode: 0640
+      setype: _default
+    when: st.stat.mode != '0640'

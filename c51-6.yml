@@ -1,0 +1,27 @@
+---
+- name: file copy modules
+  hosts: web
+  tasks:
+  - name: copy file demo
+    ansible.builtin.copy:
+      src: files/hosts
+      dest: /tmp/
+      setype: net_conf_t
+  - name: add some lines to /tmp/hosts
+    ansible.builtin.blockinfile:
+      path: /tmp/hosts
+      block: | 
+        172.25.250.10 servera.lab.example.com
+        172.25.250.11 serverb.lab.example.com
+      state: present
+  - name: verify file checksum
+    ansible.builtin.stat:
+      path: /tmp/hosts
+      checksum_algorithm: md5
+    register: result
+  - ansible.builtin.debug:
+      msg: "The checksum of /tmp/hosts is {{ result.stat.checksum }}"
+  - name: fetch a file
+    ansible.builtin.fetch:
+      src: /tmp/hosts
+      dest: results

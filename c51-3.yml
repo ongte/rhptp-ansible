@@ -1,0 +1,17 @@
+---
+- name: configuring SSH
+  hosts: all
+  tasks:
+  - name: enable root SSH login with password
+    ansible.builtin.lineinfile:
+      dest: /etc/ssh/sshd_config
+      regexp: "^PermitRootLogin"
+      insertafter: "^#PermitRootLogin"
+      line: "PermitRootLogin yes"
+    notify: restart sshd
+
+  handlers:
+  - name: restart sshd 
+    ansible.builtin.service:
+      name: sshd
+      state: restarted

@@ -1,0 +1,23 @@
+# This approach is not recommended for RHEL9. Use selinux system role instead.
+---
+- name: enabling SELinux and a boolean
+  hosts: servera
+  vars:
+    myboolean: httpd_read_user_content
+  tasks:
+  - name: enabling SELinux
+    ansible.posix.selinux:
+      policy: targeted
+      state: enforcing
+  - name: checking current {{ myboolean }} Boolean status
+    ansible.builtin.shell: getsebool -a | grep {{ myboolean }} 
+    register: bool_stat
+  - name: showing boolean status
+    ansible.builtin.debug:
+      msg: the current {{ myboolean }} status is {{ bool_stat.stdout }} 
+  - name: enabling boolean
+    ansible.posix.seboolean:
+      name: "{{ myboolean }}"
+      state: yes
+      persistent: yes
+

@@ -1,0 +1,9 @@
+---
+- name: run a task
+  hosts: all
+  tasks:
+  - ansible.builtin.debug:
+      msg: running task1
+
+- name: importing a playbook
+  import_playbook: c63.yml

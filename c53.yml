@@ -1,0 +1,24 @@
+---
+- name: installing a template file
+  hosts: servera
+  tasks:
+  - name: install http
+    ansible.builtin.dnf:
+      name: httpd
+      state: latest
+  - name: start and enable httpd
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: true
+  - name: install vhost config file
+    ansible.builtin.template:
+      src: templates/c53.j2
+      dest: /etc/httpd/conf.d/vhost.conf
+      owner: root
+      group: root
+      mode: 0644
+  - name: restart httpd
+    ansible.builtin.service:
+      name: httpd
+      state: restarted

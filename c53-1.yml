@@ -1,0 +1,8 @@
+---
+- name: generete host list
+  hosts: serverb
+  tasks:
+  - name: template loop
+    ansible.builtin.template:
+      src: templates/c53-1.j2
+      dest: /tmp/hostports.txt

@@ -1,0 +1,16 @@
+---
+- name: modifying file
+  hosts: web
+  tasks:
+  - name: ensure /tmp/hosts exists
+    ansible.builtin.file:
+      path: /tmp/hosts
+      state: touch
+  - name: add some lines to /tmp/hosts
+    ansible.builtin.blockinfile:
+      path: /tmp/hosts
+      block: | 
+        172.25.250.10 servera.lab.example.com
+        172.25.250.11 serverb.lab.example.com
+      state: present
+...

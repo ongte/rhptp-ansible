@@ -1,0 +1,11 @@
+---
+- name: demonstrate changed status
+  hosts: all
+  tasks:
+  - name: check local time
+    ansible.builtin.command: date
+    register: command_result
+
+  - name: print local time
+    ansible.builtin.debug:
+      var: command_result.stdout

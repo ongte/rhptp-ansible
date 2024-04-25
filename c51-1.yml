@@ -1,0 +1,14 @@
+---
+- name: stat module tests
+  hosts: servera
+  tasks:
+  - ansible.builtin.command: touch /tmp/statfile
+  - ansible.builtin.stat:
+      path: /tmp/statfile
+    register: st
+  - name: show current values
+    ansible.builtin.debug:
+      msg: current value of the st variable is {{ st }}
+  - ansible.builtin.fail:
+      msg: "unexpected file mode, should be set to 0640"
+    when: st.stat.mode != '0640'

@@ -1,0 +1,9 @@
+---
+- name: work with template file
+  vars:
+    apache_package: httpd
+  hosts: serverb
+  tasks:
+  - ansible.builtin.template:
+      src: templates/c53-2.j2
+      dest: /tmp/httpd.conf

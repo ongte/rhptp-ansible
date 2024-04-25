@@ -1,0 +1,24 @@
+# Note that this method is not really necessary anymore since file/copy modules
+# can set selinux contexts directly now
+---
+- name: show selinux
+  hosts: servera
+  tasks:
+  - name: install required pacakges
+    ansible.builtin.dnf:
+      name: policycoreutils-python-utils
+      state: present
+  - name: create testfile
+    ansible.builtin.file:
+      name: /tmp/selinux
+      state: touch
+  - name: set selinux context
+    community.general.sefcontext:
+      target: /tmp/selinux
+      setype: httpd_sys_content_t
+      state: present
+    notify:
+      - run restorecon
+  handlers:
+  - name: run restorecon
+    ansible.builtin.command: restorecon -v /tmp/selinux 
