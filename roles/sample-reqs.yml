@@ -1,0 +1,20 @@
+# from Galaxy selecting the version
+- src: geerlingguy.nginx
+  version: "3.2.0"
+
+# from any Git-based repository, using HTTPS
+- src: https://gitlab.com/guardianproject-ops/ansible-nginx-acme.git
+  scm: git
+  version: 56e00a54
+  name: nginx-acme
+
+# from any Git-based repository, using SSH
+- src: git@gitlab.com:guardianproject-ops/ansible-nginx-acme.git
+  scm: git
+  version: master
+  name: nginx-acme-ssh
+
+ # from a role tar ball, given a URL;
+- src: file:///opt/local/roles/myrole.tar.gz
+  name: myrole
+
