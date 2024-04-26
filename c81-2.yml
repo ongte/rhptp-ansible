@@ -1,0 +1,48 @@
+---
+- name: testing file manipulation
+  hosts: servera
+  tasks:
+  - name: create a new file
+    ansible.builtin.file:
+      name: /tmp/newfile
+      state: touch
+  - name: check status of the new file
+    ansible.builtin.stat:
+      path: /tmp/newfile
+    register: newfile
+  - name: for debugging purposes only
+    ansible.builtin.debug:
+      msg: the current values for newfile are {{ newfile }}
+  - name: change file owner if needed
+    ansible.builtin.file:
+      path: /tmp/newfile
+      owner: devops
+    when: newfile.stat.pw_name != 'devops'
+
+- name: fetching a remote file
+  hosts: servera
+  tasks:
+  - name: fetch file from remote machine
+    ansible.builtin.fetch:
+      src: /etc/issue
+      dest: results
+
+- name: adding text to the file that is now on localhost
+  hosts: localhost
+  tasks:
+  - name: add a message
+    ansible.builtin.blockinfile:
+      path: results/servera/etc/issue
+      block: |
+        welcome to this server
+        for authorized users only
+      state: present
+
+- name: copy the modified file to serverb
+  hosts: serverb
+  tasks:
+  - name: copy motd file
+    ansible.builtin.copy:
+      src: results/servera/etc/issue
+      dest: /tmp
+  

@@ -1,0 +1,22 @@
+---
+- name: using tags example
+  hosts: all
+  vars:
+    service:
+    - vsftpd
+    - httpd
+  tasks:
+  - ansible.builtin.dnf:
+      name: 
+      - httpd
+      - vsftpd
+      state: present
+    tags:
+    - install
+  - ansible.builtin.service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop: "{{ services }}"
+    tags:
+    - services

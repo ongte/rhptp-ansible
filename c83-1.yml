@@ -1,0 +1,13 @@
+---
+- name: test webserver access
+  hosts: localhost
+  become: false
+  tasks:
+  - name: connect to the web server
+    ansible.builtin.uri:
+      url: http://serverc.lab.example.com
+      return_content: yes
+    register: this
+    failed_when: "'welcome' not in this.content"
+  - ansible.builtin.debug:
+      var: this.content
