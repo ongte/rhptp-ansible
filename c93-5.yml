@@ -22,7 +22,7 @@
       name: "{{ username }}"
 
   - name: use authorized_key to set the password
-    ansible.builtin.authorized_key:
+    ansible.posix.authorized_key:
       user: "{{ username }}"
       key: "{{ lookup('file', './files/'+ username +'/id_rsa.pub') }}"
 ...

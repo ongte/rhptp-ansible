@@ -17,7 +17,7 @@
     loop: "{{ users }}"
 
   - name: add SSH public keys
-    ansible.builtin.authorized_key:
+    ansible.posix.authorized_key:
       user: "{{ item.username }}"
       key: "{{ lookup('file', 'files/'+ item.username + '/id_rsa.pub') }}"
     loop: "{{ users }}"
