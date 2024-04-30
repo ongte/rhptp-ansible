@@ -8,5 +8,5 @@
       register: command_result
       failed_when: "'world' in command_result.stdout"
     - name: see if we get here
-      debug:
+      ansible.builtin.debug:
         msg: second task executed

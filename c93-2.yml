@@ -4,5 +4,5 @@
   vars: 
     file_contents: "{{lookup('file', '/etc/hosts')}}"
   tasks:
-  - debug:
+  - ansible.builtin.debug:
       var: file_contents

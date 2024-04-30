@@ -5,5 +5,5 @@
   - vars/users-dictionary
   tasks:
   - name: print dictionary values
-    debug:
+    ansible.builtin.debug:
       msg: "User {{ users.linda.username }} has homedirectory {{ users.linda.homedir }} and shell {{ users.linda.shell }}"

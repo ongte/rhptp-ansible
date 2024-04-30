@@ -4,8 +4,8 @@
   tasks:
     - ansible.builtin.shell: cat /etc/passwd
       register: passwd_contents
-    - debug:
+    - ansible.builtin.debug:
         msg: "{{ passwd_contents }}"
-    - debug: 
+    - ansible.builtin.debug: 
         msg: passwd contains user lisa
       when: passwd_contents.stdout.find('lisa') != -1

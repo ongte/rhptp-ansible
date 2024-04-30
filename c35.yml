@@ -3,5 +3,5 @@
   hosts: all
   tasks:
   - name: show all facts
-    debug:
+    ansible.builtin.debug:
       var: ansible_facts

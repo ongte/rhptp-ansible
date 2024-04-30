@@ -10,6 +10,6 @@
     - nginx
   tasks:
   - name: something
-    debug: 
+    ansible.builtin.debug: 
       msg: you are trying to install a supported package
     when: my_answer in supported_packages

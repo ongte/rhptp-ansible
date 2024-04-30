@@ -11,5 +11,5 @@
       msg: the command has failed
     when: "'world' in command_result.stdout"
   - name: see if we get here
-    debug:
+    ansible.builtin.debug:
       msg: second task executed

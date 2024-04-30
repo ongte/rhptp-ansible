@@ -4,5 +4,5 @@
   tasks:
   - ansible.builtin.shell: cat /etc/passwd
     register: passwd_contents
-  - debug: 
+  - ansible.builtin.debug: 
       var: "passwd_contents"

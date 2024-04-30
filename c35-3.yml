@@ -1,5 +1,5 @@
 ---
 - hosts: localhost
   tasks:
-  - debug:
+  - ansible.builtin.debug:
       var: hostvars['servera']
