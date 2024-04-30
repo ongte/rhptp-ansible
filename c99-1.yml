@@ -1,0 +1,12 @@
+---
+- name: NIC Configuration
+  hosts: dev
+  vars:
+    network_connections:
+      - name: eth1
+        type: ethernet
+        state: down
+        persistent_state: absent
+  roles:
+    - redhat.rhel_system_roles.network
+

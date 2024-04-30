@@ -1,0 +1,8 @@
+---
+- name: create LVM storage
+  hosts: serverb
+  tasks: 
+  - name: Ensure that /dev/vdb1 exists
+    ansible.builtin.command:
+      cmd: parted --script /dev/vdb mklabel gpt mkpart primary 1MiB 100%
+      creates: /dev/vdb1

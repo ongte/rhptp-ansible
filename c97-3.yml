@@ -1,0 +1,12 @@
+---
+- name: Simple storage device
+  hosts: serverd
+  roles:
+  - name: redhat.rhel_system_roles.storage
+    storage_volumes:
+    - name: files
+      type: disk
+      disks: vdb
+      fs_type: xfs
+      mount_point: /mnt/files
+...

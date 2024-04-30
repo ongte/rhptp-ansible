@@ -1,0 +1,8 @@
+---
+- name: Set hostname
+  hosts: serverb
+  tasks:
+  - name: Change hostname
+    hostname:
+      name: managedhost2
+

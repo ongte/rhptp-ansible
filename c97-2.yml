@@ -1,0 +1,12 @@
+---
+- name: Check free space on root
+  hosts: all
+  tasks:
+  - name: Display free space
+    ansible.builtin.debug:
+     msg: >
+      The root fs on {{ ansible_facts['fqdn'] }} has
+      {{ item['block_available'] * item['block_size'] / 1000000000 }} GB free.
+    loop: "{{ ansible_facts['mounts'] }}"
+    when: item['mount'] == '/'
+...

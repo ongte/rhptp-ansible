@@ -1,0 +1,16 @@
+---
+- name: create LVM storage
+  hosts: servera
+  roles:
+  - name: redhat.rhel_system_roles.storage
+    storage_pools:
+      - name: dataVG
+        type: lvm
+        disks: 
+          - vdb
+        volumes:
+          - name: dataLV
+            size: 512m
+            fs_type: xfs
+            mount_point: /mnt/data
+

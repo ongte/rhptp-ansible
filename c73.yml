@@ -4,3 +4,4 @@
   roles:
   - role: motd
     system_manager: bob@example.com
+

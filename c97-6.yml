@@ -1,0 +1,5 @@
+  - name: mount the filesystem
+    ansible.builtin.mount:
+      src: /dev/dataVG/dataLV
+      fstype: xfs
+      state: mounted
