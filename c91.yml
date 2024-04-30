@@ -1,0 +1,17 @@
+---
+- name: setting up repository access
+  hosts: all
+  tasks:
+  - name: connect to example repo
+    ansible.builtin.yum_repository:
+      name: examplerepo
+      description: RHCE example repo
+      file: examplerepo
+      baseurl: http://materials.example.com/yum/repository/
+      gpgcheck: yes
+
+  - name: get the GPG public key
+    ansible.builtin.rpm_key:
+      key: http://materials.example.com/yum/repository/RPM-GPG-KEY-example
+      state: present
+

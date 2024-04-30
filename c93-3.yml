@@ -1,0 +1,9 @@
+---
+- name: authorized_key simple demo
+  hosts: serverb
+  tasks:
+  - name: copy authorized key for ansible user
+    ansible.builtin.authorized_key: 
+      user: ansible
+      state: present
+      key: "{{ lookup('file', '~/.ssh/lab_rsa.pub') }}"

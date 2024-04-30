@@ -1,0 +1,15 @@
+- name: use subscription manager to register and set up repos
+  hosts: servere
+  tasks:
+  - name: register and subscribe servere
+    community.general.redhat_subscription:
+      username: bob@example.com
+      password: verysecretpassword
+      state: present
+  - name: configure repo access
+    community.general.rhsm_repository:
+      name:
+        - rhel-9-for-x86_64-baseos-rpms
+        - rhel-9-for-x86_64-appstream-rpms
+      state: present
+

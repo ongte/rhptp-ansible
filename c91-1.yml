@@ -1,0 +1,9 @@
+---
+- name: updating all packages
+  hosts: serverb
+  tasks:
+  - name: system update
+    ansible.builtin.dnf:
+      name: '*'
+      state: latest
+...

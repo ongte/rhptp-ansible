@@ -1,0 +1,28 @@
+---
+- name: prepare localhost
+  hosts: localhost
+  tasks:
+  - name: create a directory to store the file
+    ansible.builtin.file:
+      name: "files/{{ username }}"
+      state: directory
+
+  - name: copy the local user ssh key to temporary {{ username }} key
+    ansible.builtin.shell: 'cat ~/.ssh/lab_rsa.pub > ./files/{{ username }}/id_rsa.pub'
+    become: true
+
+  - name: verify that file exists
+    ansible.builtin.command: ls -l files/{{ username }}/
+
+- name: setup remote host
+  hosts: servera
+  tasks:
+  - name: create remote user, no need for SSH key
+    ansible.builtin.user:
+      name: "{{ username }}"
+
+  - name: use authorized_key to set the password
+    ansible.builtin.authorized_key:
+      user: "{{ username }}"
+      key: "{{ lookup('file', './files/'+ username +'/id_rsa.pub') }}"
+...

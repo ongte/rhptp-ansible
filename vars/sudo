@@ -1,0 +1,16 @@
+sudo_groups:
+  - name: developers
+    groupid: 20000
+    sudo: false
+  - name: admins
+    groupid: 20001
+    sudo: true
+  - name: dbas
+    groupid: 20002
+    sudo: false
+  - name: sales
+    groupid: 20003
+    sudo: false
+  - name: account
+    groupid: 20004
+    sudo: true

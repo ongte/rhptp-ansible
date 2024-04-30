@@ -1,0 +1,8 @@
+---
+- name: installing an AppStream module
+  hosts: serverb
+  tasks:
+  - name: install or update an AppStream module
+    ansible.builtin.dnf:
+      name: '@php:7.3/devel'
+      state: present

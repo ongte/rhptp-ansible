@@ -1,0 +1,24 @@
+---
+- name: configure  users with SSH keys
+  hosts: serverb
+  vars_files:
+    - vars/users
+    - vars/groups
+  tasks:
+  - name: add groups
+    ansible.builtin.group:
+      name: "{{ item.groupname }}"
+    loop: "{{ usergroups }}"
+
+  - name: add users
+    ansible.builtin.user:
+      name: "{{ item.username }}"
+      groups: "{{ item.groups }}"
+    loop: "{{ users }}"
+
+  - name: add SSH public keys
+    ansible.builtin.authorized_key:
+      user: "{{ item.username }}"
+      key: "{{ lookup('file', 'files/'+ item.username + '/id_rsa.pub') }}"
+    loop: "{{ users }}"
+

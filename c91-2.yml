@@ -1,0 +1,8 @@
+---
+- name: install or update a package group
+  hosts: serverb
+  tasks:
+  - name: install or update a package group
+    ansible.builtin.dnf:
+      name: '@Virtualization Host'
+      state: latest

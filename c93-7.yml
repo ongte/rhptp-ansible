@@ -1,0 +1,16 @@
+- name: create user with encrypted password
+  hosts: serverc
+  vars:
+    password: mypassword
+    user: anna
+  tasks:
+  - name: configure user {{ user }} 
+    ansible.builtin.user:
+      name: "{{ user }}"
+      groups: wheel
+      append: yes
+      state: present
+  
+  - name: set a password for {{ user }} 
+    ansible.builtin.shell: 'echo {{ password }} | passwd --stdin {{ user }}'
+

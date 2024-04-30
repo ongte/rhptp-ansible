@@ -1,0 +1,25 @@
+---
+- name: configure sudo
+  hosts: serverb
+  vars_files:
+    - vars/sudo
+    - vars/users
+  tasks:
+  - name: add groups
+    ansible.builtin.group:
+      name: "{{ item.name }}"
+      gid: "{{ item.groupid }}"
+    loop: "{{ sudo_groups }}"
+
+  - name: add users
+    ansible.builtin.user:
+      name: "{{ item.username }}"
+      groups: "{{ item.groups }}"
+    loop: "{{ users }}"
+
+  - name: allow group members in sudo
+    ansible.builtin.template:
+      src: c93.j2
+      dest: /etc/sudoers.d/sudogroups
+      validate: 'visudo -cf %s'
+      mode: 0440
