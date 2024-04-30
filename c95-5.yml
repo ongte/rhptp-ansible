@@ -1,0 +1,9 @@
+---
+- name: set default boot target
+  hosts: serverb
+  tasks:
+    - name: set boot target to multi-user
+      ansible.builtin.file:
+        src: /usr/lib/systemd/system/multi-user.target
+        dest: /etc/systemd/system/default.target
+        state: link

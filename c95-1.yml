@@ -1,0 +1,10 @@
+---
+- name: run a cron job
+  hosts: serverb
+  tasks:
+  - name: run a periodic job
+    ansible.builtin.cron:
+      name: "run fstrim"
+      minute: "5"
+      hour: "4,19"
+      job: "fstrim"

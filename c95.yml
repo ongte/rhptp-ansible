@@ -1,0 +1,11 @@
+---
+- name: using systemd module to manage services
+  hosts: serverb
+  tasks:
+  - name: enable service httpd and ensure it is not masked
+    ansible.builtin.systemd:
+      name: httpd
+      enabled: yes
+      state: started
+      masked: no
+      daemon_reload: yes

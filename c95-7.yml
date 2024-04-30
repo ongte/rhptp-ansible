@@ -1,0 +1,14 @@
+---
+- name: reboot all hosts
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: reboot hosts
+    ansible.builtin.reboot:
+      msg: reboot initiated by Ansible
+      test_command: whoami
+      reboot_timeout: 60
+  
+  - name: print message to show host is back
+    ansible.builtin.debug:
+      msg: successfully rebooted

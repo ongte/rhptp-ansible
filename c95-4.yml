@@ -1,0 +1,10 @@
+---
+- name: using systemd module to manage services
+  hosts: serverb
+  tasks:
+  - name: disable and stop dnf-makecache timer unit
+    ansible.builtin.systemd:
+      name: dnf-makecache.timer
+      enabled: no
+      state: stopped
+
