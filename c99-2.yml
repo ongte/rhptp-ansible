@@ -3,6 +3,6 @@
   hosts: serverb
   tasks:
   - name: Change hostname
-    hostname:
+    ansible.builtin.hostname:
       name: managedhost2
 

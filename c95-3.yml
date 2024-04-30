@@ -3,7 +3,7 @@
   hosts: serverb
   tasks:
     - name: run command and write output to file
-      ansible.builtin.at:
+      ansible.posix.at:
         command: "date > /tmp/my-at-file"
         count: 5
         units: minutes
