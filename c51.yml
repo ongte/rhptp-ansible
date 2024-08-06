@@ -1,0 +1,10 @@
+---
+- name: stat module tests
+  hosts: servera
+  tasks:
+  - ansible.builtin.stat:
+      path: /etc/hosts
+    register: st
+  - name: show current values
+    ansible.builtin.debug:
+      msg: current value of the st variable is {{ st }}
