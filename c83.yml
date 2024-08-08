@@ -3,5 +3,5 @@
   hosts: serverb
   tasks:
   - ansible.builtin.template:
-      src: templates/c81-2.j2
+      src: templates/c83.j2
       dest: /etc/issue
