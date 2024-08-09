@@ -6,3 +6,17 @@
     ansible.builtin.command:
       cmd: parted --script /dev/vdb mklabel gpt mkpart primary 1MiB 100%
       creates: /dev/vdb1
+  - name: mkfs vdb1
+    ansible.builtin.command:
+      cmd: mkfs.xfs /dev/vdb1
+    ignore_errors: true
+  - name: mkdir data
+    ansible.builtin.file:
+      path: /mnt/data
+      state: directory
+  - name: mount data2
+    ansible.posix.mount:
+      path: /mnt/data
+      src: /dev/vdb1
+      fstype: xfs
+      state: mounted
